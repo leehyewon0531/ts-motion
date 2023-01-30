@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Header from '../../components/Header';
+import Body from '../../components/Body';
 import GlobalStyle from '../../components/GlobalStyle';
 import bgImage from '../../assets/cool-background.png';
 
@@ -9,6 +10,7 @@ const MainPage = () => {
     <MainContainer>
       <GlobalStyle />
       <Header></Header>
+      <Body></Body>
     </MainContainer>
   )
 };
