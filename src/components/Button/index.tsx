@@ -1,13 +1,22 @@
-import React from 'react';
+import { useState } from 'react';
+import ReactDOM from 'react-dom';
 import styled from "styled-components";
+import MyModal from '../../components/MyModal'
 
-const Button = (props: {btnStr: string}) => {
+const Button = (props: { btnStr: string }) => {
   const { btnStr } = props;
+  const [isOpen, setOpen] = useState(false);
 
   return (
-    <BtnElement>
-      {btnStr}
-    </BtnElement>
+    <div>
+      <BtnElement onClick={() => setOpen(true)}>
+        {btnStr}
+      </BtnElement>
+      <MyModal 
+        btnStr={btnStr}
+        isOpen={isOpen}
+        setOpen={setOpen} ></MyModal>
+    </div>
   );
 };
 
