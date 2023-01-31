@@ -2,9 +2,10 @@ import { useState } from 'react';
 import ReactDOM from 'react-dom';
 import styled from "styled-components";
 import MyModal from '../../components/MyModal'
+import button from '../../types/button';
 
-const Button = (props: { btnStr: string }) => {
-  const { btnStr } = props;
+const Button = (props: { btnStr: button, setBodyList: Function }) => {
+  const { btnStr, setBodyList } = props;
   const [isOpen, setOpen] = useState(false);
 
   return (
@@ -15,7 +16,8 @@ const Button = (props: { btnStr: string }) => {
       <MyModal 
         btnStr={btnStr}
         isOpen={isOpen}
-        setOpen={setOpen} ></MyModal>
+        setOpen={setOpen}
+        setBodyList={setBodyList} ></MyModal>
     </div>
   );
 };

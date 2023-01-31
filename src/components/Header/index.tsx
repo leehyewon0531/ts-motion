@@ -2,15 +2,17 @@ import React from 'react';
 import styled from "styled-components";
 import Button from '../Button';
 
-const Header = () => {
+const Header = (props: { setBodyList: Function }) => {
+  const { setBodyList } = props;
+
   return (
     <HeaderContainer>
       <div className="header__text">MOTION</div>
       <div className="button-container">
-        <Button btnStr="IMAGE"></Button>
-        <Button btnStr="VIDEO"></Button>
-        <Button btnStr="NOTE"></Button>
-        <Button btnStr="TASK"></Button>
+        <Button btnStr="IMAGE" setBodyList={setBodyList} ></Button>
+        <Button btnStr="VIDEO" setBodyList={setBodyList} ></Button>
+        <Button btnStr="NOTE" setBodyList={setBodyList} ></Button>
+        <Button btnStr="TASK" setBodyList={setBodyList} ></Button>
       </div>
     </HeaderContainer>
   );

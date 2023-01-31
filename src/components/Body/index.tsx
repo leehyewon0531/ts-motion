@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import modal from '../../types/modal';
 
-const Body = () => {
+const Body = (props: { bodyList: Array<modal> | null }) => {
   return(
     <BodyElement></BodyElement>
   );
