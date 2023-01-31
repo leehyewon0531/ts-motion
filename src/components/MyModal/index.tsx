@@ -2,16 +2,30 @@ import Modal from 'react-modal';
 import styled from 'styled-components';
 import { useState } from 'react';
 import button from '../../types/button';
+import modal from '../../types/modal';
 
 Modal.setAppElement('#root');
 
-const MyModal = (props: { btnStr: button, isOpen: boolean, setOpen: Function, setBodyList: Function }) => {
-  const { btnStr, isOpen, setOpen, setBodyList } = props;
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+const MyModal = (props: { 
+    btnStr: button, 
+    isOpen: boolean, 
+    setOpen: Function,
+    bodyList: Array<modal>, 
+    setBodyList: Function }) => {
+  const { btnStr, isOpen, setOpen, bodyList, setBodyList } = props;
+  const [title, setTitle] = useState<string>('');
+  const [content, setContent] = useState<string>('');
 
   const addElement = () => {
     setOpen(false);
+    const el: modal = {
+      title,
+      content,
+      modalType: btnStr
+    }
+    const arr = [...bodyList]
+    arr.push(el);
+    setBodyList(arr);
   }
 
   return (

@@ -7,12 +7,12 @@ import bgImage from '../../assets/cool-background.png';
 import modal from '../../types/modal';
 
 const MainPage = () => {
-  const [bodyList, setBodyList] = useState<Array<modal> | null>(null);
+  const [bodyList, setBodyList] = useState<Array<modal>>([]);
 
   return (
     <MainContainer>
       <GlobalStyle />
-      <Header setBodyList={setBodyList} ></Header>
+      <Header bodyList={bodyList} setBodyList={setBodyList} ></Header>
       <Body bodyList={bodyList} ></Body>
     </MainContainer>
   )

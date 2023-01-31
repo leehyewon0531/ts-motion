@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom';
 import styled from "styled-components";
 import MyModal from '../../components/MyModal'
 import button from '../../types/button';
+import modal from '../../types/modal';
 
-const Button = (props: { btnStr: button, setBodyList: Function }) => {
-  const { btnStr, setBodyList } = props;
+const Button = (props: { btnStr: button, bodyList: Array<modal>, setBodyList: Function }) => {
+  const { btnStr, bodyList, setBodyList } = props;
   const [isOpen, setOpen] = useState(false);
 
   return (
@@ -17,6 +18,7 @@ const Button = (props: { btnStr: button, setBodyList: Function }) => {
         btnStr={btnStr}
         isOpen={isOpen}
         setOpen={setOpen}
+        bodyList={bodyList}
         setBodyList={setBodyList} ></MyModal>
     </div>
   );

@@ -1,13 +1,18 @@
 import styled from 'styled-components';
 import modal from '../../types/modal';
+import BodyElement from '../Element';
 
-const Body = (props: { bodyList: Array<modal> | null }) => {
+const Body = (props: { bodyList: Array<modal> }) => {
+  let { bodyList } = props;
+
   return(
-    <BodyElement></BodyElement>
+    <BodyContainer>
+      {bodyList.map((el, idx) => (<BodyElement el={el} key={idx} />))}
+    </BodyContainer>
   );
 };
 
-const BodyElement = styled.div`
+const BodyContainer = styled.div`
   width: 1200px;
   height: 1570px;
   background-color: #2d2d2d;
