@@ -25,6 +25,7 @@ const MyModal = (props: {
     }
     const arr = [...bodyList]
     arr.push(el);
+    console.log(arr);
     setBodyList(arr);
   }
 
