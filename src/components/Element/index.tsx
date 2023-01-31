@@ -1,5 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import modal from '../../types/modal';
+import button from '../../types/button';
 
 const BodyElement = (props: { el: modal }) => {
   const { el } = props;
@@ -11,7 +12,7 @@ const BodyElement = (props: { el: modal }) => {
   }
 
   return (
-    <ElementContainer>
+    <ElementContainer modalType={el.modalType} >
       { (el.modalType == 'IMAGE') && <ImageElement imgSrc={el.content} >
         <div className='image-box'></div>
         <div className='image__content-box'>
@@ -30,27 +31,44 @@ const BodyElement = (props: { el: modal }) => {
           <button className='video__x-button'>X</button>
         </div>
       </VideoElement> }
-      { (el.modalType == 'NOTE') && <NoteElement>{el.title}</NoteElement> }
-      { (el.modalType == 'TASK') && <TaskElement>{el.title}</TaskElement> }
+      { (el.modalType == 'NOTE') && <NoteElement>
+        <div className='note-title'>{el.title}</div>
+        <div className='note-content'>{el.content}</div>
+        <button className='note-x-button'>X</button>
+      </NoteElement> }
+      { (el.modalType == 'TASK') && <TaskElement>
+        <div className='task-title'>{el.title}</div>
+        <label className='task-content' ><input type="checkbox" value={el.content} /> {el.content}</label>
+        <button className='task-x-button'>X</button>
+      </TaskElement> }
     </ElementContainer>
   );
 };
 
-const ElementContainer = styled.div`
+const ElementContainer = styled.div<{ modalType: button }>`
   width: 1120px;
-  height: 315px;
+  height: 150px;
+  ${ props => props.modalType == "IMAGE" && 
+    css`
+      height: 315px;
+    `
+  }
+  ${ props => props.modalType == "VIDEO" && 
+    css`
+      height: 315px;
+    `
+  }
   position: relative;
   left: 50%;
   transform: translateX(-50%);
-  color: #fff;
   background-color: #686868;
+  color: #ffe498;
   margin: 10px 0px;
 `;
 
 const ImageElement = styled.div<{ imgSrc: string }>`
   width: inherit;
   height: inherit;
-  color: #ffe498;
   display: flex;
 
   .image-box {
@@ -90,7 +108,6 @@ const ImageElement = styled.div<{ imgSrc: string }>`
 const VideoElement = styled.div`
   width: inherit;
   height: inherit;
-  color: #ffe498;
   display: flex;
 
   .video-box {
@@ -126,13 +143,73 @@ const VideoElement = styled.div`
 `;
 
 const NoteElement = styled.div`
-  width: 200px;
-  height: 200px;
-  color: blue;
+  width: inherit;
+  height: 250px;
+  font-size: 30px;
+
+  .note-title {
+    width: 1000px;
+    height: 50px;
+    position: absolute;
+    top: 25px;
+    left: 10px;
+  }
+
+  .note-content {
+    width: 1000px;
+    height: 70px;
+    position: absolute;
+    top: 80px;
+    left: 10px;
+    font-size: 20px;
+    color: #fff;
+  }
+
+  .note-x-button {
+    border: none;
+    background: none;
+    color: #f64435;
+    font-size: 25px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 5px;
+  }
 `;
 
 const TaskElement = styled.div`
-  
+  width: inherit;
+  height: 250px;
+  font-size: 30px;
+
+  .task-title {
+    width: 1000px;
+    height: 50px;
+    position: absolute;
+    top: 25px;
+    left: 10px;
+  }
+
+  .task-content {
+    width: 1000px;
+    height: 70px;
+    position: absolute;
+    top: 80px;
+    left: 10px;
+    font-size: 20px;
+    color: #fff;
+  }
+
+  .task-x-button {
+    border: none;
+    background: none;
+    color: #f64435;
+    font-size: 25px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 5px;
+  }
 `;
 
 export default BodyElement;
