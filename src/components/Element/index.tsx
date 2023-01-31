@@ -14,33 +14,34 @@ const BodyElement = (props: { el: modal }) => {
   return (
     <ElementContainer modalType={el.modalType} >
       { (el.modalType == 'IMAGE') && <ImageElement imgSrc={el.content} >
-        <div className='image-box'></div>
-        <div className='image__content-box'>
-          <div className='image__title-text'>{el.title}</div>
-          <button className='image__x-button'>X</button>
+        <div id='image-box' className='box' ></div>
+        <div className='content-box' >
+          <div className='title-text' >{el.title}</div>
+          <button className='x-button' >X</button>
         </div>
       </ImageElement> }
       { (el.modalType == 'VIDEO') && <VideoElement>
-      <iframe  className='video-box' width="560" height="315" src={addEmbed(el.content)} 
+      <iframe id='video-box' className='box' 
+        width="560" height="315" src={addEmbed(el.content)} 
         title="YouTube video player" 
         frameBorder="0" 
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
         allowFullScreen ></iframe>
-        <div className='video__content-box'>
-          <div className='video__title-text'>{el.title}</div>
-          <button className='video__x-button'>X</button>
+        <div className='content-box' >
+          <div className='title-text' >{el.title}</div>
+          <button className='x-button' >X</button>
         </div>
       </VideoElement> }
-      { (el.modalType == 'NOTE') && <NoteElement>
-        <div className='note-title'>{el.title}</div>
-        <div className='note-content'>{el.content}</div>
-        <button className='note-x-button'>X</button>
-      </NoteElement> }
-      { (el.modalType == 'TASK') && <TaskElement>
-        <div className='task-title'>{el.title}</div>
-        <label className='task-content' ><input type="checkbox" value={el.content} /> {el.content}</label>
-        <button className='task-x-button'>X</button>
-      </TaskElement> }
+      { (el.modalType == 'NOTE') && <NoteAndTaskElement>
+        <div className='title-text-only' >{el.title}</div>
+        <div className='content-text-only' >{el.content}</div>
+        <button className='x-button'>X</button>
+      </NoteAndTaskElement> }
+      { (el.modalType == 'TASK') && <NoteAndTaskElement>
+        <div className='title-text-only' >{el.title}</div>
+        <label className='content-text-only' ><input type="checkbox" value={el.content} /> {el.content}</label>
+        <button className='x-button'>X</button>
+      </NoteAndTaskElement> }
     </ElementContainer>
   );
 };
@@ -64,6 +65,55 @@ const ElementContainer = styled.div<{ modalType: button }>`
   background-color: #686868;
   color: #ffe498;
   margin: 10px 0px;
+
+  .box {
+    width: 560px;
+    height: inherit;
+  }
+
+  .content-box {
+    width: 560px;
+    height: inherit;
+    font-size: 30px;
+    position: relative;
+
+    .title-text {
+      width: 550px;
+      height: 30px;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+  }
+
+  .title-text-only {
+    width: 1000px;
+    height: 50px;
+    position: absolute;
+    top: 25px;
+    left: 10px;
+  }
+
+  .content-text-only {
+    width: 1000px;
+    height: 70px;
+    position: absolute;
+    top: 80px;
+    left: 10px;
+    font-size: 20px;
+    color: #fff;
+  }
+
+  .x-button {
+      border: none;
+      background: none;
+      color: #f64435;
+      font-size: 25px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 5px;
+  }
 `;
 
 const ImageElement = styled.div<{ imgSrc: string }>`
@@ -71,37 +121,9 @@ const ImageElement = styled.div<{ imgSrc: string }>`
   height: inherit;
   display: flex;
 
-  .image-box {
-    width: 560px;
-    height: inherit;
+  #image-box {
     background-image: url(${props => props.imgSrc});
     background-size: cover;
-  }
-
-  .image__content-box {
-    width: 560px;
-    height: inherit;
-    font-size: 30px;
-    position: relative;
-
-    .image__title-text {
-      width: 550px;
-      height: 30px;
-      position: absolute;
-      top: 20px;
-      left: 20px;
-    }
-
-    .image__x-button {
-      border: none;
-      background: none;
-      color: #f64435;
-      font-size: 25px;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      right: 5px;
-    }
   }
 `;
 
@@ -109,107 +131,12 @@ const VideoElement = styled.div`
   width: inherit;
   height: inherit;
   display: flex;
-
-  .video-box {
-    width: 560px;
-    height: inherit;
-  }
-
-  .video__content-box {
-    width: 560px;
-    height: inherit;
-    font-size: 30px;
-    position: relative;
-
-    .video__title-text {
-      width: 550px;
-      height: 30px;
-      position: absolute;
-      top: 20px;
-      left: 20px;
-    }
-
-    .video__x-button {
-      border: none;
-      background: none;
-      color: #f64435;
-      font-size: 25px;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      right: 5px;
-    }
-  }
 `;
 
-const NoteElement = styled.div`
+const NoteAndTaskElement = styled.div`
   width: inherit;
   height: 250px;
   font-size: 30px;
-
-  .note-title {
-    width: 1000px;
-    height: 50px;
-    position: absolute;
-    top: 25px;
-    left: 10px;
-  }
-
-  .note-content {
-    width: 1000px;
-    height: 70px;
-    position: absolute;
-    top: 80px;
-    left: 10px;
-    font-size: 20px;
-    color: #fff;
-  }
-
-  .note-x-button {
-    border: none;
-    background: none;
-    color: #f64435;
-    font-size: 25px;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: 5px;
-  }
-`;
-
-const TaskElement = styled.div`
-  width: inherit;
-  height: 250px;
-  font-size: 30px;
-
-  .task-title {
-    width: 1000px;
-    height: 50px;
-    position: absolute;
-    top: 25px;
-    left: 10px;
-  }
-
-  .task-content {
-    width: 1000px;
-    height: 70px;
-    position: absolute;
-    top: 80px;
-    left: 10px;
-    font-size: 20px;
-    color: #fff;
-  }
-
-  .task-x-button {
-    border: none;
-    background: none;
-    color: #f64435;
-    font-size: 25px;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: 5px;
-  }
 `;
 
 export default BodyElement;
