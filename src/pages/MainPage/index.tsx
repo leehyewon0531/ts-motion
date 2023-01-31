@@ -1,16 +1,19 @@
-import React from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import Header from '../../components/Header';
 import Body from '../../components/Body';
 import GlobalStyle from '../../components/GlobalStyle';
 import bgImage from '../../assets/cool-background.png';
+import modal from '../../types/modal';
 
 const MainPage = () => {
+  const [bodyList, setBodyList] = useState<Array<modal>>([]);
+
   return (
     <MainContainer>
       <GlobalStyle />
-      <Header></Header>
-      <Body></Body>
+      <Header bodyList={bodyList} setBodyList={setBodyList} ></Header>
+      <Body bodyList={bodyList} ></Body>
     </MainContainer>
   )
 };

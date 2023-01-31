@@ -1,16 +1,19 @@
 import React from 'react';
 import styled from "styled-components";
+import modal from '../../types/modal';
 import Button from '../Button';
 
-const Header = () => {
+const Header = (props: { bodyList: Array<modal> , setBodyList: Function }) => {
+  const { bodyList, setBodyList } = props;
+
   return (
     <HeaderContainer>
       <div className="header__text">MOTION</div>
       <div className="button-container">
-        <Button btnStr="IMAGE"></Button>
-        <Button btnStr="VIDEO"></Button>
-        <Button btnStr="NOTE"></Button>
-        <Button btnStr="TASK"></Button>
+        <Button btnStr="IMAGE" bodyList={bodyList} setBodyList={setBodyList} ></Button>
+        <Button btnStr="VIDEO" bodyList={bodyList} setBodyList={setBodyList} ></Button>
+        <Button btnStr="NOTE" bodyList={bodyList} setBodyList={setBodyList} ></Button>
+        <Button btnStr="TASK" bodyList={bodyList} setBodyList={setBodyList} ></Button>
       </div>
     </HeaderContainer>
   );

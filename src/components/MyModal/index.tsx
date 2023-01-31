@@ -1,16 +1,32 @@
 import Modal from 'react-modal';
 import styled from 'styled-components';
 import { useState } from 'react';
+import button from '../../types/button';
+import modal from '../../types/modal';
 
 Modal.setAppElement('#root');
 
-const MyModal = (props: { btnStr: string, isOpen: boolean, setOpen: Function }) => {
-  const { btnStr, isOpen, setOpen } = props;
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+const MyModal = (props: { 
+    btnStr: button, 
+    isOpen: boolean, 
+    setOpen: Function,
+    bodyList: Array<modal>, 
+    setBodyList: Function }) => {
+  const { btnStr, isOpen, setOpen, bodyList, setBodyList } = props;
+  const [title, setTitle] = useState<string>('');
+  const [content, setContent] = useState<string>('');
 
   const addElement = () => {
     setOpen(false);
+    const el: modal = {
+      title,
+      content,
+      modalType: btnStr
+    }
+    const arr = [...bodyList]
+    arr.push(el);
+    console.log(arr);
+    setBodyList(arr);
   }
 
   return (
@@ -18,32 +34,32 @@ const MyModal = (props: { btnStr: string, isOpen: boolean, setOpen: Function }) 
         <ModalContent>
           <button onClick={()=> setOpen(false)} id="x-button">X</button>
           <div className="modal-text" id="modal-first-text">Title</div>
-          <input type="text" id="modal-first-input" />
+          <input type="text" id="modal-first-input" onChange={(e) => setTitle(e.target.value)} />
           { (btnStr == 'IMAGE') && 
             <div>
               <div className="modal-text" id="modal-second-text">URL</div>
-              <input type="text" id="modal-second-input" />
+              <input type="text" id="modal-second-input" onChange={(e) => setContent(e.target.value)} />
               <button onClick={addElement} id="add-button">ADD</button>
             </div>
           }
           { (btnStr == 'VIDEO') && 
             <div>
               <div className="modal-text" id="modal-second-text">URL</div>
-              <input type="text" id="modal-second-input" />
+              <input type="text" id="modal-second-input" onChange={(e) => setContent(e.target.value)} />
               <button onClick={addElement} id="add-button">ADD</button>
             </div>
           }
           { (btnStr == 'NOTE') && 
             <div>
               <div className="modal-text" id="modal-second-text">body</div>
-              <input type="text" id="modal-second-input" />
+              <input type="text" id="modal-second-input" onChange={(e) => setContent(e.target.value)} />
               <button onClick={addElement} id="add-button">ADD</button>
             </div>
           }
           { (btnStr == 'TASK') && 
             <div>
               <div className="modal-text" id="modal-second-text">body</div>
-              <input type="text" id="modal-second-input" />
+              <input type="text" id="modal-second-input" onChange={(e) => setContent(e.target.value)} />
               <button onClick={addElement} id="add-button">ADD</button>
             </div>
           }
