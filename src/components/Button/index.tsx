@@ -27,7 +27,7 @@ const Button = (props: { btnStr: button, bodyList: Array<modal>, setBodyList: Fu
 const BtnElement = styled.button`
   width: 170px;
   height: 80px;
-  background-color: #f64435;
+  background-color: #000;
   color: #fff;
   font-size: 20px;
   border-radius: 10px;
